@@ -3,31 +3,31 @@ public:
     int largestRectangleArea(vector<int>& heights) {
         int n=heights.size();
         stack<int>st;
-        long long  maxArea=0;
+        int maxArea=-1;
+
         for(int i=0;i<n;i++){
             while(!st.empty() && heights[i]<heights[st.top()]){
-                int element= st.top();
+                int elementTop=st.top();
                 st.pop();
 
                 int nse=i;
-                int pse=st.empty() ? -1 : st.top();
-
-                long long  width=nse-pse-1;
-                long long  area=width* heights[element];
-                maxArea=max(area,maxArea);
+                int pse= st.empty() ? -1 : st.top();
+                //elementTop   st.top()
+                int width= nse-pse-1;
+                int area= width* heights[elementTop];
+                maxArea=max(maxArea,area);
             }
             st.push(i);
         }
         while(!st.empty()){
-            int element =st.top();
+            int elementTop=st.top();
             st.pop();
 
             int nse=n;
-            int pse=st.empty() ? -1 : st.top();
+            int pse= st.empty() ? -1 : st.top();
 
-            long long  width=nse-pse-1;
-            long long  area=width*heights[element];
-
+            int width= nse-pse-1;
+            int area= width* heights[elementTop];
             maxArea=max(maxArea,area);
         }
         return maxArea;
